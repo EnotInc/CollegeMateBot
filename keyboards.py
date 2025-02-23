@@ -4,10 +4,10 @@ from aiogram.types import (
     )
 
 menu = ReplyKeyboardMarkup(keyboard=[
-    [KeyboardButton(text='Расписание на сегодня')],
+    #[KeyboardButton(text='Расписание на сегодня')],
     [KeyboardButton(text='Расписание на эту неделю'), KeyboardButton(text='Расписание на след. неделю')],
-    [KeyboardButton(text='/help'), KeyboardButton(text='о проекте')],
-    [KeyboardButton(text='Поддерэать проект'), KeyboardButton(text='Сообщить об ошибке')]
+    #[KeyboardButton(text='/help'), KeyboardButton(text='о проекте')],
+    #[KeyboardButton(text='Поддерэать проект'), KeyboardButton(text='Сообщить об ошибке')]
 ], resize_keyboard=True, input_field_placeholder="Выберите один из пунктов")
 
 coures_this = InlineKeyboardMarkup(inline_keyboard=[
