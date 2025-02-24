@@ -17,7 +17,7 @@ class Report(StatesGroup):
 
 @router.message(CommandStart())
 async def cmd_start(message: Message):
-    await message.answer("Привет, это Your Collage Bro. Это бот способный облегчить твое прибывание в колледже.\
+    await message.answer("Привет, это бот способный облегчить твое прибывание в колледже.\
                          Сдать БД я тебе, конечно, не помогу, но подкинуть рассписание или напомнить о начале пары - без проблем, просто выбери необходимый пункт в меню",
                             reply_markup=kb.menu)
 
