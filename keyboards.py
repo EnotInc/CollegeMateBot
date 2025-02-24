@@ -8,8 +8,8 @@ from aiogram.types import (
 
 menu = ReplyKeyboardMarkup(keyboard=[
     #[KeyboardButton(text='Расписание на сегодня')],
-    [KeyboardButton(text=emoji.emojize(':timer_clock: Время пар'))],
-    [KeyboardButton(text= emoji.emojize(':calendar: Расписание на эту неделю')), KeyboardButton(text=emoji.emojize(':calendar: Расписание на след. неделю'))],
+    [KeyboardButton(text=emoji.emojize(':stopwatch: Время пар'))],
+    [KeyboardButton(text= emoji.emojize(':clipboard: Расписание на эту неделю')), KeyboardButton(text=emoji.emojize(':calendar: Расписание на след. неделю'))],
     #[KeyboardButton(text='/help'), KeyboardButton(text='о проекте')],
     #[KeyboardButton(text='Поддерэать проект'), KeyboardButton(text='Сообщить об ошибке')]
 ], resize_keyboard=True, input_field_placeholder="Выберите один из пунктов")

@@ -3,6 +3,7 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message, CallbackQuery
 from parser import get_link, get_schedule_pdf
 
+import emoji
 import keyboards as kb
 
 time_array = ['9:00 - 10:30', '10:50 - 11:35 & 11:55 - 12:40', '13:00 - 14:30', '14:50 - 16:20', '16:30 - 18:00']
@@ -26,16 +27,16 @@ async def get_today(message:Message):
                                 #'\nПреподаватель: ' + ''
                                 '\nВремя: ' + str(time_array[i]))
         
-@router.message(F.text == 'Время пар')
+@router.message(F.text == emoji.emojize(':stopwatch: Время пар'))
 async def get_today(message:Message):
     for i in range(0, 5):
         await message.answer('№ ' +str(i+1)+ ' Время: ' + str(time_array[i]))
 
-@router.message(F.text == "Расписание на эту неделю")
+@router.message(F.text == emoji.emojize(":clipboard: Расписание на эту неделю"))
 async def get_week(message: Message):
     await message.answer('Ты на каком курсе сейчас?', reply_markup=kb.coures_this)
 
-@router.message(F.text == "Расписание на след. неделю")
+@router.message(F.text == emoji.emojize(":calendar: Расписание на след. неделю"))
 async def get_week(message: Message):
     await message.answer('Ты на каком курсе сейчас?', reply_markup=kb.coures_next)
 
