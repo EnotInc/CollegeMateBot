@@ -1,12 +1,15 @@
+import emoji
+
 from aiogram.types import (
     ReplyKeyboardMarkup, KeyboardButton,
     InlineKeyboardMarkup, InlineKeyboardButton
     )
 
+
 menu = ReplyKeyboardMarkup(keyboard=[
     #[KeyboardButton(text='Расписание на сегодня')],
-    [KeyboardButton(text='Время пар')],
-    [KeyboardButton(text='Расписание на эту неделю'), KeyboardButton(text='Расписание на след. неделю')],
+    [KeyboardButton(text=emoji.emojize(':timer_clock: Время пар'))],
+    [KeyboardButton(text= emoji.emojize(':calendar: Расписание на эту неделю')), KeyboardButton(text=emoji.emojize(':calendar: Расписание на след. неделю'))],
     #[KeyboardButton(text='/help'), KeyboardButton(text='о проекте')],
     #[KeyboardButton(text='Поддерэать проект'), KeyboardButton(text='Сообщить об ошибке')]
 ], resize_keyboard=True, input_field_placeholder="Выберите один из пунктов")
