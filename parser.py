@@ -1,6 +1,7 @@
 import requests
 import os
 
+from datetime import date, datetime
 from dotenv import load_dotenv
 
 
@@ -20,19 +21,36 @@ def get_link(course=0, week=0):
     jres = response.json()
 
     try:
-        req = jres['data']['folders'][2]['files'][course + 4*week]
+        for i in range(12):
+            req = jres['data']['folders'][2]['files'][i]
+            
+            altName = req.get('altName')
+            link = os.getenv('LINK')+req.get('src')
+            last_date = req.get('title')[-10:]
 
-        altName = req.get('altName')
-        link = os.getenv('LINK')+req.get('src')
-
-        if altName[:10] == 'raspisanie':
-            return link
-        else:
-            return None
+            if altName[:10] == 'raspisanie':
+                if date_diff(last_date) <= 7 and week == 0 and int(altName[26]) == course+1:
+                    return link
+                elif date_diff(last_date) > 7 and week == 1 and int(altName[26]) == course+1:
+                    return link
+            else:
+                return None
 
     except Exception as ex:
         print(ex)
         return None
+
+
+
+def date_diff(getted_date):
+    date_format = '%d.%m.%Y'
+
+    date1 = datetime.strptime(getted_date, date_format).date()
+    today = date.today()
+
+    delta = date1 - today 
+    return delta.days
+
 
 
 def get_schedule_pdf(course=0, week=0):

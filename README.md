@@ -46,6 +46,7 @@ URL='СЫЛЛКА НА ЗАПРОС С JSON ОТВЕТОМ, В КОТОРОМ Х
 LINK='ССЫЛКА НА ГЛАВНУЮ СТРАНИЦУ САЙТА'
 ACCEPT='ACCEPT'
 USER_AGENT='USER_AGENT'
+DEVELOPER='ID ВАШЕГО ЧАТА В ТГ'
 ```
 
 ***ВАЖНО!***

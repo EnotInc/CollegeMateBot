@@ -2,13 +2,18 @@ from aiogram import F, Router
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message, CallbackQuery
 from parser import get_link, get_schedule_pdf
+from aiogram.fsm.state import State, StatesGroup
+from aiogram.fsm.context import FSMContext
 
+import os
 import emoji
 import keyboards as kb
 
 time_array = ['9:00 - 10:30', '10:50 - 11:35 & 11:55 - 12:40', '13:00 - 14:30', '14:50 - 16:20', '16:30 - 18:00']
-
 router = Router()
+
+class Report(StatesGroup):
+    bag = State()
 
 @router.message(CommandStart())
 async def cmd_start(message: Message):
@@ -16,12 +21,18 @@ async def cmd_start(message: Message):
                          Сдать БД я тебе, конечно, не помогу, но подкинуть рассписание или напомнить о начале пары - без проблем, просто выбери необходимый пункт в меню",
                             reply_markup=kb.menu)
 
-@router.message(Command('help'))
-async def cdm_help(message: Message):
-    await message.answer("А в чем тут помощь нужна? Просто выбери расписание какой недели нужно, ну и тыкни на кнопку с курсом. Все.\nЕсли что-то полшо не так, ну, блин, анлаки. Что могу сказать")
+@router.message(F.text == emoji.emojize(':e-mail: Связаться с разрабом'))
+async def bug_report(message: Message, state: FSMContext):
+    await state.set_state(Report.bag)
+    await message.answer('Опишите что у вас пошло не так, или напишите свое предложение о доработке бота')
 
+@router.message(Report.bag)
+async def send_repot(message: Message, state: FSMContext):
+    await message.forward(os.getenv('DEVELOPER'))
+    await message.answer("Я передал ваше сообщение разработчику.\nСпасибо за помощь в развитии пректа!")
+    await state.clear()
 
-@router.message(F.text == 'о проекте')
+@router.message(F.text == emoji.emojize(':red_question_mark: информация о проекте'))
 async def about(message:Message):
     await message.answer('Так, ну что я могу сказать о себе. Даже не знаю. Я тут просто для того что бы помочь тебе с расписанием в колледже. Подробнее можешь прочитать на странице гит хаба:\nhttps://github.com/EnotInc/MyCollageBro')
 
