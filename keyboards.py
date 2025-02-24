@@ -5,6 +5,7 @@ from aiogram.types import (
 
 menu = ReplyKeyboardMarkup(keyboard=[
     #[KeyboardButton(text='Расписание на сегодня')],
+    [KeyboardButton(text='Время пар')],
     [KeyboardButton(text='Расписание на эту неделю'), KeyboardButton(text='Расписание на след. неделю')],
     #[KeyboardButton(text='/help'), KeyboardButton(text='о проекте')],
     #[KeyboardButton(text='Поддерэать проект'), KeyboardButton(text='Сообщить об ошибке')]

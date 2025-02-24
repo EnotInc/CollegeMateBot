@@ -22,9 +22,14 @@ async def get_today(message:Message):
     get_schedule_pdf()
     for i in range(0, 5):
         await message.answer('№ ' +str(i+1)+ ' - ' + ''
-                                '\nВ кабинете: ' + ''
-                                '\nПреподаватель: ' + ''
+                                #'\nВ кабинете: ' + ''
+                                #'\nПреподаватель: ' + ''
                                 '\nВремя: ' + str(time_array[i]))
+        
+@router.message(F.text == 'Время пар')
+async def get_today(message:Message):
+    for i in range(0, 5):
+        await message.answer('№ ' +str(i+1)+ ' Время: ' + str(time_array[i]))
 
 @router.message(F.text == "Расписание на эту неделю")
 async def get_week(message: Message):

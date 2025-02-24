@@ -1,6 +1,5 @@
 import requests
 import os
-import requests
 
 from dotenv import load_dotenv
 
@@ -42,3 +41,4 @@ def get_schedule_pdf(course=0, week=0):
 
     with open('file.pdf', '+wb') as f:
         f.write(res.content)
+   

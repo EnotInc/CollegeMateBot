@@ -12,8 +12,9 @@ async def main():
     try:
         dp.include_router(router)
         await dp.start_polling(bot)
+        print('Bot Started')
     except:
-         print("Exit")
+         print("Bot Got Shut Down")
 
 if __name__ == "__main__":
         load_dotenv()
