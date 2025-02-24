@@ -34,7 +34,7 @@ async def send_repot(message: Message, state: FSMContext):
 
 @router.message(F.text == emoji.emojize(':red_question_mark: информация о проекте'))
 async def about(message:Message):
-    await message.answer('Так, ну что я могу сказать о себе. Даже не знаю. Я тут просто для того что бы помочь тебе с расписанием в колледже. Подробнее можешь прочитать на странице гит хаба:\nhttps://github.com/EnotInc/MyCollageBro')
+    await message.answer('Так, ну что я могу сказать о себе. Даже не знаю. Я тут просто для того что бы помочь тебе с расписанием в колледже. Подробнее можешь прочитать на странице гит хаба:\nhttps://github.com/EnotInc/CollegeMateBot')
 
 @router.message(F.text == 'Расписание на сегодня')
 async def get_today(message:Message):
