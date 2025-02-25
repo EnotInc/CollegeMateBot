@@ -9,6 +9,7 @@ import keyboards as kb
 
 rout_commands = Router()
 
+
 @rout_commands.message(CommandStart())
 async def cmd_start(message: Message):
     await message.answer("Привет, это бот способный облегчить твое пребывание в колледже.\n\
