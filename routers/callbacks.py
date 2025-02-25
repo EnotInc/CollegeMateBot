@@ -35,7 +35,7 @@ async def bug_report(message: Message, state: FSMContext):
 
 @rout_callbacks.message(Report.bag)
 async def send_repot(message: Message, state: FSMContext):
-    await message.reply("Я передал ваше сообщение разработчику.\nСпасибо за помощь в развитии пректа!")
+    await message.reply("Я передал ваше сообщение разработчику.\nСпасибо за помощь в развитии пректа!", reply_markup=kb.menu)
     await message.forward(os.getenv('DEVELOPER'))
     await state.clear()
 
@@ -43,5 +43,5 @@ async def send_repot(message: Message, state: FSMContext):
 @rout_callbacks.callback_query(F.data == 'cancel')
 async def cancel(callback: CallbackQuery, state: FSMContext):
     await state.clear()
-    await callback.message.edit_text('Запрос отменен', reply_markup=None)
+    await callback.message.edit_text('Запрос отменен', reply_markup=kb.menu)
     
