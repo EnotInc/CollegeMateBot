@@ -3,9 +3,9 @@ from aiogram.types import Message, CallbackQuery
 from parser import get_link 
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
+from buttons import CALL
 
 import os
-import emoji
 import keyboards as kb
 
 
@@ -27,7 +27,7 @@ async def get_this_week(callback: CallbackQuery):
         await callback.message.edit_text('Сорян, я не нашел рассписание :(\nЧто-то пошло не так')
 
 
-@rout_callbacks.message(F.text == emoji.emojize(':e-mail: Связаться с разрабом'))
+@rout_callbacks.message(F.text == CALL)
 async def bug_report(message: Message, state: FSMContext):
     await state.set_state(Report.bag)
     await message.answer('Опишите что у вас пошло не так, или напишите свое предложение о доработке бота', reply_markup=kb.cancel)

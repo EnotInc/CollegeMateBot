@@ -1,4 +1,4 @@
-import emoji
+import buttons as b
 
 from aiogram.types import (
     ReplyKeyboardMarkup, KeyboardButton,
@@ -7,10 +7,10 @@ from aiogram.types import (
 
 
 menu = ReplyKeyboardMarkup(keyboard=[
-    [KeyboardButton(text=emoji.emojize(':stopwatch: Время пар'))],
-    [KeyboardButton(text=emoji.emojize(':clipboard: Расписание на эту неделю')), KeyboardButton(text=emoji.emojize(':calendar: Расписание на след. неделю'))],
-    [KeyboardButton(text=emoji.emojize(':e-mail: Связаться с разрабом')), KeyboardButton(text=	emoji.emojize(':red_question_mark: информация о проекте'))],
-    [KeyboardButton(text=emoji.emojize('/help'))],
+    [KeyboardButton(text=b.TIME)],
+    [KeyboardButton(text=b.THIS), KeyboardButton(text=b.NEXT)],
+    [KeyboardButton(text=b.CALL), KeyboardButton(text=b.ABOUT)],
+    [KeyboardButton(text=b.HELP)],
 ], resize_keyboard=True, input_field_placeholder="Выбери что нужно", is_persistent=True, one_time_keyboard=False)
 
 
