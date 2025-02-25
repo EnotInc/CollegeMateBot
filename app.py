@@ -1,7 +1,10 @@
 import asyncio
 import os
 
-from handlers import router
+from routers.callbacks import rout_callbacks
+from routers.comands import rout_commands
+from routers.messages import rout_messages
+
 from aiogram import Bot, Dispatcher
 from dotenv import load_dotenv
 
@@ -10,7 +13,9 @@ dp = Dispatcher()
 
 async def main():
     try:
-        dp.include_router(router)
+        dp.include_router(rout_callbacks)
+        dp.include_router(rout_commands)
+        dp.include_router(rout_messages)
         await dp.start_polling(bot)
         print('Bot Started')
     except:
