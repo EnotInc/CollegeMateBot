@@ -12,7 +12,7 @@ menu = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text= emoji.emojize(':clipboard: Расписание на эту неделю')), KeyboardButton(text=emoji.emojize(':calendar: Расписание на след. неделю'))],
     [KeyboardButton(text=emoji.emojize(':e-mail: Связаться с разрабом')), KeyboardButton(text=	emoji.emojize(':red_question_mark: информация о проекте'))],
     #[KeyboardButton(text='Поддерэать проект'), KeyboardButton(text='Сообщить об ошибке')]
-], resize_keyboard=True, input_field_placeholder="Выберите один из пунктов")
+], resize_keyboard=True, input_field_placeholder="Выбери что нужно", is_persistent=True)
 
 coures_this = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='1-й', callback_data='00'), InlineKeyboardButton(text='2-й', callback_data='01')],
