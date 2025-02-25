@@ -9,6 +9,10 @@ import keyboards as kb
 
 rout_commands = Router()
 
+@rout_commands.message()
+async def kb(message: Message):
+    await message.answer(reply_markup=kb.menu)
+
 
 @rout_commands.message(CommandStart())
 async def cmd_start(message: Message):
@@ -49,3 +53,4 @@ async def help_cmd(message: Message):
                          \n/get_time - время начала и конца пар\
                          \n/report - оправить отчет о баге или предложние о доработке\
                          \n\nТак же каждая из этих команд может быть выполнена при помощи кнопок в меню')
+

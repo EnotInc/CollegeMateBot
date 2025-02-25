@@ -29,10 +29,9 @@ async def main():
         dp.include_router(rout_callbacks)
         dp.include_router(rout_commands)
         dp.include_router(rout_messages)
-        setup_bot_commands()
         await dp.start_polling(bot)
     except:
-         print("Bot Got Shut Down")
+         print("Bot Got Stopped")
 
 if __name__ == "__main__":
         load_dotenv()
