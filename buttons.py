@@ -1,8 +1,8 @@
 import emoji
 
 HELP='/help'
-TIME=emoji.emojize('Время пар:stopwatch:')
-THIS=emoji.emojize(':clipboard: Расписание на эту неделю')
-NEXT=emoji.emojize(':calendar: Расписание на след. неделю')
-CALL=emoji.emojize(':e-mail: Связаться с разрабом')
-ABOUT=emoji.emojize(':red_question_mark: информация о проекте')
+TIME=emoji.emojize('Время пар :stopwatch:')
+THIS=emoji.emojize('Расписание на эту неделю :clipboard:')
+NEXT=emoji.emojize('Расписание на след. неделю :calendar:')
+CALL=emoji.emojize('Отзыв :speech_balloon:')
+ABOUT=emoji.emojize('О проекте :gear:')

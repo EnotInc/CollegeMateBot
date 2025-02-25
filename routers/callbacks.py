@@ -35,8 +35,8 @@ async def bug_report(message: Message, state: FSMContext):
 
 @rout_callbacks.message(Report.bag)
 async def send_repot(message: Message, state: FSMContext):
+    await message.reply("Я передал ваше сообщение разработчику.\nСпасибо за помощь в развитии пректа!")
     await message.forward(os.getenv('DEVELOPER'))
-    await message.answer("Я передал ваше сообщение разработчику.\nСпасибо за помощь в развитии пректа!")
     await state.clear()
 
 

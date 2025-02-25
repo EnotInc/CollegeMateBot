@@ -7,11 +7,11 @@ from aiogram.types import (
 
 
 menu = ReplyKeyboardMarkup(keyboard=[
-    [KeyboardButton(text=b.TIME)],
-    [KeyboardButton(text=b.THIS), KeyboardButton(text=b.NEXT)],
-    [KeyboardButton(text=b.CALL), KeyboardButton(text=b.ABOUT)],
-    [KeyboardButton(text=b.HELP)],
-], resize_keyboard=True, input_field_placeholder="Выбери что нужно", is_persistent=True, one_time_keyboard=False)
+    [KeyboardButton(text=b.THIS)],
+    [KeyboardButton(text=b.NEXT)],
+    [KeyboardButton(text=b.TIME), KeyboardButton(text=b.ABOUT)],
+    [KeyboardButton(text=b.CALL), KeyboardButton(text=b.HELP)]
+], resize_keyboard=True, input_field_placeholder="= )", is_persistent=True, one_time_keyboard=False)
 
 
 coures_this = InlineKeyboardMarkup(inline_keyboard=[
