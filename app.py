@@ -14,16 +14,6 @@ bot = Bot(token=os.getenv('TOKEN'))
 dp = Dispatcher()
 
 
-async def setup_bot_commands():
-     bot_commands = [
-          BotCommand(command='/help', description='подсказку о командах'),
-          BotCommand(command='/get_this_week', description='расписание на наделю'),
-          BotCommand(command='/get_next_week', description='расписание на следю неделю'),
-          BotCommand(command='/get_time', description='время начала и конца пар'),
-          BotCommand(command='/report', description='оправить отчет о баге или предложние о доработке')
-     ]
-     await bot.set_my_commands(bot_commands)
-
 async def main():
     try:
         dp.include_router(rout_callbacks)
