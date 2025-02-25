@@ -6,6 +6,7 @@ from aiogram.fsm.context import FSMContext
 
 import os
 import emoji
+import keyboards as kb
 
 
 rout_callbacks = Router()
@@ -27,10 +28,15 @@ class Report(StatesGroup):
 @rout_callbacks.message(F.text == emoji.emojize(':e-mail: Связаться с разрабом'))
 async def bug_report(message: Message, state: FSMContext):
     await state.set_state(Report.bag)
-    await message.answer('Опишите что у вас пошло не так, или напишите свое предложение о доработке бота')
+    await message.answer('Опишите что у вас пошло не так, или напишите свое предложение о доработке бота', reply_markup=kb.cancel)
 
 @rout_callbacks.message(Report.bag)
 async def send_repot(message: Message, state: FSMContext):
     await message.forward(os.getenv('DEVELOPER'))
     await message.answer("Я передал ваше сообщение разработчику.\nСпасибо за помощь в развитии пректа!")
     await state.clear()
+
+
+@rout_callbacks.callback_query(F.data == 'cancel')
+async def cancel(callback: CallbackQuery):
+    await callback.message.edit_text('Запрос отменен', reply_markup=None)

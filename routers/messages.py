@@ -13,16 +13,16 @@ async def about(message:Message):
     await message.answer('Так, ну что я могу сказать о себе. Даже не знаю. Я тут просто для того что бы помочь тебе с расписанием в колледже. Подробнее можешь прочитать на странице гит хаба:\nhttps://github.com/EnotInc/CollegeMateBot')
  
 @rout_messages.message(F.text == emoji.emojize(':stopwatch: Время пар'))
-async def get_today(message:Message):
+async def get_time(message:Message):
     for i in range(0, 5):
         await message.answer('№ ' +str(i+1)+ ' Время: ' + str(time_array[i]))
 
 @rout_messages.message(F.text == emoji.emojize(":clipboard: Расписание на эту неделю"))
-async def get_week(message: Message):
+async def get_this_week(message: Message):
     await message.answer('Ты на каком курсе сейчас?', reply_markup=kb.coures_this)
 
 @rout_messages.message(F.text == emoji.emojize(":calendar: Расписание на след. неделю"))
-async def get_week(message: Message):
+async def get_next_week(message: Message):
     await message.answer('Ты на каком курсе сейчас?', reply_markup=kb.coures_next)
 
 @rout_messages.message(F.text == 'Сообщить об ошибке')
