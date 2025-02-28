@@ -5,7 +5,6 @@ from routers.callbacks import rout_callbacks
 from routers.comands import rout_commands
 from routers.messages import rout_messages
 
-from aiogram.types import BotCommand
 from aiogram import Bot, Dispatcher
 from dotenv import load_dotenv
 
@@ -16,12 +15,13 @@ dp = Dispatcher()
 
 async def main():
     try:
+        from auto_scheduler import scheduler
         dp.include_router(rout_callbacks)
         dp.include_router(rout_commands)
         dp.include_router(rout_messages)
-        await dp.start_polling(bot)
+        await asyncio.gather(dp.start_polling(bot), scheduler())
     except:
-         print("Bot Got Stopped")
+         print(f"Bot Got Stopped")
 
 if __name__ == "__main__":
         load_dotenv()
