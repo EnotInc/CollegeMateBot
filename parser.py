@@ -32,8 +32,10 @@ def get_link(course=0, week=0):
             if altName[:10] == 'raspisanie':
                 if date_diff(last_date) <= 7 and week == 0 and int(altName[26]) == course+1:
                     return link
+                    break
                 elif date_diff(last_date) > 7 and week == 1 and int(altName[26]) == course+1:
                     return link
+                    break
             else:
                 return None
 

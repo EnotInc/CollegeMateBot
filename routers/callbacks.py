@@ -14,6 +14,8 @@ rout_callbacks = Router()
 class Report(StatesGroup):
     bag = State()
 
+class cheduleInit(StatesGroup):
+    init = State()
 
 @rout_callbacks.callback_query(F.data.in_(['00', '01', '02', '03', '10', '11', '12', '13']))
 async def get_this_week(callback: CallbackQuery):
