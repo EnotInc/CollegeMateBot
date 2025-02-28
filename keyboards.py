@@ -26,6 +26,12 @@ coures_next = InlineKeyboardMarkup(inline_keyboard=[
 ])
 
 
+auto_courses = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='1-й', callback_data='0'), InlineKeyboardButton(text='2-й', callback_data='1')],
+    [InlineKeyboardButton(text='3-й', callback_data='2'), InlineKeyboardButton(text='4/5', callback_data='3')],
+    [InlineKeyboardButton(text='Отмена', callback_data='c')]
+])
+
 cancel = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Отмена', callback_data='cancel')]
 ])

@@ -29,6 +29,22 @@ async def get_this_week(callback: CallbackQuery):
         await callback.message.edit_text('Сорян, я не нашел рассписание :(\nВозможно его еще не загрузили на сайт колледжа')
 
 
+@rout_callbacks.callback_query(F.data.in_(['1', '2', '3', '0', 'c']))
+async def get_this_week(callback: CallbackQuery):
+    try:
+        if callback.data != 'c':
+            course = int(callback.data)
+            week = 1
+            link = get_link(course=course, week=week)
+            await callback.message.edit_text(f'Отлично, теперь по пятницам я смогу отправлять сюда расписане за {course}-й курс')
+            await callback.message.answer_document(link)
+        else:
+            await callback.message.edit_text('Запрос отменен', reply_markup=None)
+    except Exception as ex:
+        await callback.message.edit_text('Сорян, что-то пошло не так :|')
+        print(ex)
+
+
 @rout_callbacks.message(F.text == CALL)
 async def bug_report(message: Message, state: FSMContext):
     await state.set_state(Report.bag)

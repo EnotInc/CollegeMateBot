@@ -30,17 +30,15 @@ def get_link(course=0, week=0):
             last_date = req.get('title')[-10:]
 
             if altName[:10] == 'raspisanie':
-                if date_diff(last_date) <= 7 and week == 0 and int(altName[26]) == course+1:
+                if date_diff(last_date) < 7 and week == 0 and int(altName[26]) == course+1:
                     return link
-                    break
-                elif date_diff(last_date) > 7 and week == 1 and int(altName[26]) == course+1:
+                elif date_diff(last_date) >= 7 and week == 1 and int(altName[26]) == course+1:
                     return link
-                    break
             else:
                 return None
 
     except Exception as ex:
-        print(ex)
+        print(f'Error in parser:\n{ex}')
         return None
 
 

@@ -53,3 +53,8 @@ async def help_cmd(message: Message):
                          \n/about - информация о боте\
                          \n\nТак же каждая из этих команд может быть выполнена при помощи кнопок в меню')
 
+
+@rout_commands.message(Command('init'))
+async def init_auto_cheduler(message: Message):
+    await message.answer('Расписание какого курса вы хотите получать?', reply_markup=kb.auto_courses)
+
