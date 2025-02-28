@@ -14,6 +14,7 @@ headers = {
 
 url = os.getenv('URL')
 
+
 def get_link(course=0, week=0):
     s = requests.Session()
 
@@ -50,13 +51,3 @@ def date_diff(getted_date):
 
     delta = date1 - today 
     return delta.days
-
-
-
-def get_schedule_pdf(course=0, week=0):
-    url = get_link(course=course, week=week)
-    res = requests.get(url)
-
-    with open('file.pdf', '+wb') as f:
-        f.write(res.content)
-   

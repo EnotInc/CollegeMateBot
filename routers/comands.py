@@ -36,9 +36,11 @@ async def get_time_cmd(message: Message):
 async def bug_report_cdm(message: Message, state: FSMContext):
     await bug_report(message, state)
 
+
 @rout_commands.message(Command('about'))
 async def about_cmd(message: Message):
     await about(message)
+
 
 @rout_commands.message(Command('help'))
 async def help_cmd(message: Message):

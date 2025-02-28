@@ -24,7 +24,7 @@ async def get_this_week(callback: CallbackQuery):
         await callback.message.edit_text('Ваше Расписание:')
         await callback.message.answer_document(link)
     except:
-        await callback.message.edit_text('Сорян, я не нашел рассписание :(\nЧто-то пошло не так')
+        await callback.message.edit_text('Сорян, я не нашел рассписание :(\nВозможно его еще не загрузили на сайт колледжа')
 
 
 @rout_callbacks.message(F.text == CALL)
@@ -35,13 +35,17 @@ async def bug_report(message: Message, state: FSMContext):
 
 @rout_callbacks.message(Report.bag)
 async def send_repot(message: Message, state: FSMContext):
-    await message.reply("Я передал ваше сообщение разработчику.\nСпасибо за помощь в развитии пректа!", reply_markup=kb.menu)
-    await message.forward(os.getenv('DEVELOPER'))
-    await state.clear()
+    try:
+        await message.forward(os.getenv('DEVELOPER'))
+        await message.reply("Я передал ваше сообщение разработчику.\nСпасибо за помощь в развитии пректа!", reply_markup=kb.menu)
+        await state.clear()
+    except Exception as ex:
+        await message.answer('Так, у меня что-то cломалось и отправить озыв не удалось\nПрошу прощения!', reply_markup=None)
+        print(ex)
 
 
 @rout_callbacks.callback_query(F.data == 'cancel')
 async def cancel(callback: CallbackQuery, state: FSMContext):
     await state.clear()
-    await callback.message.edit_text('Запрос отменен', reply_markup=kb.menu)
+    await callback.message.edit_text('Запрос отменен', reply_markup=None)
     
