@@ -33,15 +33,26 @@ auto_courses = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Отмена', callback_data='c')]
 ])
 
+
+edit_auto_courses = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='1-й', callback_data='e0'), InlineKeyboardButton(text='2-й', callback_data='e1')],
+    [InlineKeyboardButton(text='3-й', callback_data='e2'), InlineKeyboardButton(text='4/5', callback_data='e3')],
+    [InlineKeyboardButton(text='Отмена', callback_data='c')]
+])
+
+
 cancel = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Отмена', callback_data='cancel')]
 ])
 
+
 auto_settings = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text=emoji.emojize('Подключить :check_mark_button:'), callback_data='add')],
     [InlineKeyboardButton(text=emoji.emojize('Изменить курс :counterclockwise_arrows_button:'), callback_data='edit')],
-    [InlineKeyboardButton(text=emoji.emojize('Отключить :cross_mark:'), callback_data='delete')]
+    [InlineKeyboardButton(text=emoji.emojize('Отключить :cross_mark:'), callback_data='delete')],
+    [InlineKeyboardButton(text='Отмена', callback_data='c')]
 ])
+
 
 are_you_shure = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text=emoji.emojize('Да'), callback_data='yes'),  InlineKeyboardButton(text=emoji.emojize('Нет'), callback_data='no')]

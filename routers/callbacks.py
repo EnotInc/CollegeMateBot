@@ -47,6 +47,24 @@ async def get_this_week(callback: CallbackQuery):
         print(ex)
 
 
+@rout_callbacks.callback_query(F.data.in_(['e1', 'e2', 'e3', 'e0', 'c']))
+async def get_this_week(callback: CallbackQuery):
+    try:
+        if callback.data != 'c':
+            from auto_scheduler import edit_user
+            course = int(callback.data[1])
+            
+            if edit_user(user_chat_id=callback.message.chat.id, new_course=course):
+                await callback.message.edit_text(f'Отлично, курс обновлен на {course+1}-й')
+            else:
+                await callback.message.edit_text('Вы не подключены к рассылке')
+        else:
+            await callback.message.edit_text('Запрос отменен', reply_markup=None)
+    except Exception as ex:
+        await callback.message.edit_text('Сорян, что-то пошло не так :|')
+        print(ex)
+
+
 @rout_callbacks.message(F.text == CALL)
 async def bug_report(message: Message, state: FSMContext):
     await state.set_state(Report.bag)
@@ -78,6 +96,11 @@ async def add_user_for_scheduler(callback: CallbackQuery):
 @rout_callbacks.callback_query(F.data == 'delete')
 async def delete_user_for_scheduler(callback: CallbackQuery):
     await callback.message.edit_text(text='Вы уверены что хотите отказаться от рассылки?', reply_markup=kb.are_you_shure)
+
+
+@rout_callbacks.callback_query(F.data == 'edit')
+async def edit_user_for_chesuler(callback: CallbackQuery):
+    await callback.message.edit_text(text='Выберите новый курс', reply_markup=kb.edit_auto_courses)
 
 
 @rout_callbacks.callback_query(F.data == 'yes')

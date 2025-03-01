@@ -75,3 +75,22 @@ def delete_user(user_chat_id):
     except Exception as ex:
         print(f'Error at delete_user:\n{ex}')
         return None
+
+def edit_user(user_chat_id, new_course):
+    with open('users.json', "r+", encoding="utf-8") as file:
+        users = json.load(file)
+        updated = False
+        
+        for user in users:
+            if user["user_chat_id"] == user_chat_id:
+                user["course"] = new_course
+                updated = True
+                break
+
+        if not updated:
+            return False
+
+        file.seek(0)
+        json.dump(users, file, ensure_ascii=False, indent=4)
+        file.truncate()
+        return True
