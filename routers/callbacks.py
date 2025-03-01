@@ -33,8 +33,13 @@ async def get_this_week(callback: CallbackQuery):
 async def get_this_week(callback: CallbackQuery):
     try:
         if callback.data != 'c':
+            from auto_scheduler import add_user
             course = int(callback.data)
-            await callback.message.edit_text(f'Отлично, теперь по пятницам я смогу отправлять сюда расписане за {course + 1}-й курс')
+            
+            if add_user(user_chat_id=callback.message.chat.id, course=course):
+                await callback.message.edit_text(f'Отлично, теперь по пятницам я смогу отправлять сюда расписане за {course + 1}-й курс')
+            else:
+                await callback.message.edit_text('Вы уже подлючены к рассылке')
         else:
             await callback.message.edit_text('Запрос отменен', reply_markup=None)
     except Exception as ex:
@@ -64,3 +69,27 @@ async def cancel(callback: CallbackQuery, state: FSMContext):
     await state.clear()
     await callback.message.edit_text('Запрос отменен', reply_markup=None)
     
+
+@rout_callbacks.callback_query(F.data == 'add')
+async def add_user_for_scheduler(callback: CallbackQuery):
+    await callback.message.edit_text('Ты на каком курсе сейчас?', reply_markup=kb.auto_courses) 
+
+
+@rout_callbacks.callback_query(F.data == 'delete')
+async def delete_user_for_scheduler(callback: CallbackQuery):
+    await callback.message.edit_text(text='Вы уверены что хотите отказаться от рассылки?', reply_markup=kb.are_you_shure)
+
+
+@rout_callbacks.callback_query(F.data == 'yes')
+async def delete_user_finally(callback: CallbackQuery):
+    try:
+        from auto_scheduler import delete_user
+        delete_user(callback.message.chat.id)
+        await callback.message.edit_text('Рассылка оменена')
+    except Exception as ex:
+        await callback.message.edit_text('Что-то пошло не так')
+
+
+@rout_callbacks.callback_query(F.data == 'no')
+async def cancel_delete_user(callback: CallbackQuery):
+    await callback.message.edit_text('Что бы вы хотели настроить?', reply_markup=kb.auto_settings) 

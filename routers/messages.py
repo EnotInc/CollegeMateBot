@@ -30,3 +30,7 @@ async def get_this_week(message: Message):
 @rout_messages.message(F.text == b.NEXT)
 async def get_next_week(message: Message):
     await message.answer('Ты на каком курсе сейчас?', reply_markup=kb.coures_next)
+
+@rout_messages.message(F.text == b.AUTO)
+async def set_auto_scheduler(message: Message):
+    await message.answer('Что вы хотели бы настроить?', reply_markup=kb.auto_settings)

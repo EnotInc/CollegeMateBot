@@ -1,4 +1,5 @@
 import buttons as b
+import emoji
 
 from aiogram.types import (
     ReplyKeyboardMarkup, KeyboardButton,
@@ -7,6 +8,7 @@ from aiogram.types import (
 
 
 menu = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text=b.AUTO)],
     [KeyboardButton(text=b.THIS), KeyboardButton(text=b.NEXT)],
     [KeyboardButton(text=b.TIME), KeyboardButton(text=b.ABOUT)],
     [KeyboardButton(text=b.CALL), KeyboardButton(text=b.HELP)]
@@ -33,4 +35,14 @@ auto_courses = InlineKeyboardMarkup(inline_keyboard=[
 
 cancel = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Отмена', callback_data='cancel')]
+])
+
+auto_settings = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text=emoji.emojize('Подключить :check_mark_button:'), callback_data='add')],
+    [InlineKeyboardButton(text=emoji.emojize('Изменить курс :counterclockwise_arrows_button:'), callback_data='edit')],
+    [InlineKeyboardButton(text=emoji.emojize('Отключить :cross_mark:'), callback_data='delete')]
+])
+
+are_you_shure = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text=emoji.emojize('Да'), callback_data='yes'),  InlineKeyboardButton(text=emoji.emojize('Нет'), callback_data='no')]
 ])

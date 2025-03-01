@@ -1,4 +1,5 @@
 import os
+import json
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -6,10 +7,16 @@ from apscheduler.triggers.cron import CronTrigger
 from parser import get_link
 from app import bot
 
+
 async def friday_schedule():
     try:
-        await bot.send_message(chat_id=os.getenv('DEVELOPER'), text='Ваше расписание:')
-        await bot.send_document(chat_id=os.getenv('DEVELOPER'), document=get_link(course=0, week=1))
+        users = []
+        with open('users.json', 'r+') as file:
+            users = json.load(file)
+        
+        for user in users:
+            await bot.send_message(chat_id=user['user_chat_id'], text='Ваше расписание:')
+            await bot.send_document(chat_id=user['user_chat_id'], document=get_link(course=user['user_course'], week=1))
     except Exception as ex:
         print(ex)
 
@@ -20,10 +27,51 @@ async def scheduler():
     scheduler.add_job(
          friday_schedule, trigger=CronTrigger(
               day_of_week="*",
-              hour="21",
-              minute="49",
+              hour="23",
+              minute="54",
               timezone="Europe/Moscow"
          )
     )
 
     scheduler.start()
+
+
+def add_user(user_chat_id, course) -> bool:
+    try:
+        new_user = []
+
+        with open('users.json', 'r') as file:
+            new_user = json.load(file)
+
+            if any(user['user_chat_id'] == user_chat_id for user in new_user):
+                return False
+
+        new_user.append({
+            'user_chat_id': user_chat_id,
+            'user_course': course
+        })
+
+        with open('users.json', 'r+') as file:
+            json.dump(new_user, file, ensure_ascii=False, indent=4)
+        return True
+
+    except Exception as ex:
+        print(f'Error at add_user:\n{ex}')
+        return False
+
+
+def delete_user(user_chat_id):
+    try:
+        with open('users.json', 'r') as file:
+            users = json.load(file)
+        
+        new_users = [user for user in users if user['user_chat_id'] != user_chat_id]
+        if len(new_users) == len(users):
+            return None        
+
+        with open('users.json', 'w') as file:
+            json.dump(new_users, file,  ensure_ascii=False, indent=4)
+
+    except Exception as ex:
+        print(f'Error at delete_user:\n{ex}')
+        return None

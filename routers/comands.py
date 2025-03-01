@@ -1,7 +1,7 @@
 from aiogram import Router
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
-from routers.messages import get_this_week, get_next_week, get_time, about
+from routers.messages import get_this_week, get_next_week, get_time, about, set_auto_scheduler
 from routers.callbacks import bug_report
 from aiogram.fsm.context import FSMContext
 
@@ -54,7 +54,6 @@ async def help_cmd(message: Message):
                          \n\nТак же каждая из этих команд может быть выполнена при помощи кнопок в меню')
 
 
-@rout_commands.message(Command('init'))
-async def init_auto_cheduler(message: Message):
-    await message.answer('Расписание какого курса вы хотите получать?', reply_markup=kb.auto_courses)
-
+@rout_commands.message(Command('schedule_settings'))
+async def set_auto_cheduler_cmd(message: Message):
+    await set_auto_scheduler(message)
