@@ -7,8 +7,7 @@ from aiogram.types import (
 
 
 menu = ReplyKeyboardMarkup(keyboard=[
-    [KeyboardButton(text=b.THIS)],
-    [KeyboardButton(text=b.NEXT)],
+    [KeyboardButton(text=b.THIS), KeyboardButton(text=b.NEXT)],
     [KeyboardButton(text=b.TIME), KeyboardButton(text=b.ABOUT)],
     [KeyboardButton(text=b.CALL), KeyboardButton(text=b.HELP)]
 ], resize_keyboard=True, input_field_placeholder="= )", one_time_keyboard=False)

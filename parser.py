@@ -2,10 +2,7 @@ import requests
 import os
 
 from datetime import date, datetime
-from dotenv import load_dotenv
 
-
-load_dotenv()
 
 headers = {
         "Accept": os.getenv('ACCEPT'),
@@ -20,6 +17,7 @@ def get_link(course=0, week=0):
 
     response = s.get(url=url, headers=headers)
     jres = response.json()
+    s.close()
 
     try:
         for i in range(12):
@@ -30,17 +28,16 @@ def get_link(course=0, week=0):
             last_date = req.get('title')[-10:]
 
             if altName[:10] == 'raspisanie':
-                if date_diff(last_date) < 7 and week == 0 and int(altName[26]) == course+1:
+                if date_diff(last_date) < 5 and week == 0 and int(altName[26]) == course+1:
                     return link
-                elif date_diff(last_date) >= 7 and week == 1 and int(altName[26]) == course+1:
+                elif date_diff(last_date) >= 5 and week == 1 and int(altName[26]) == course+1:
                     return link
             else:
-                return None
+                return None 
 
     except Exception as ex:
         print(f'Error in parser:\n{ex}')
         return None
-
 
 
 def date_diff(getted_date):

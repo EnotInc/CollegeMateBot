@@ -21,7 +21,7 @@ async def main():
         dp.include_router(rout_messages)
         await asyncio.gather(dp.start_polling(bot), scheduler())
     except:
-         print(f"Bot Got Stopped")
+         print("Bot Got Stopped")
 
 if __name__ == "__main__":
         load_dotenv()

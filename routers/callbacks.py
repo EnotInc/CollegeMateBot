@@ -34,10 +34,7 @@ async def get_this_week(callback: CallbackQuery):
     try:
         if callback.data != 'c':
             course = int(callback.data)
-            week = 1
-            link = get_link(course=course, week=week)
-            await callback.message.edit_text(f'Отлично, теперь по пятницам я смогу отправлять сюда расписане за {course}-й курс')
-            await callback.message.answer_document(link)
+            await callback.message.edit_text(f'Отлично, теперь по пятницам я смогу отправлять сюда расписане за {course + 1}-й курс')
         else:
             await callback.message.edit_text('Запрос отменен', reply_markup=None)
     except Exception as ex:
