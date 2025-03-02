@@ -25,9 +25,9 @@ async def scheduler():
     
     scheduler.add_job(
          friday_schedule, trigger=CronTrigger(
-              day_of_week="*",
-              hour="*",
-              minute="*",
+              day_of_week="fri",
+              hour="12",
+              minute="40",
               timezone="Europe/Moscow"
          )
     )
