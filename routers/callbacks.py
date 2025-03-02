@@ -6,6 +6,7 @@ from aiogram.fsm.context import FSMContext
 from buttons import CALL
 
 import os
+import emoji
 import keyboards as kb
 
 
@@ -23,10 +24,14 @@ async def get_this_week(callback: CallbackQuery):
         course = int(callback.data[1])
         week = int(callback.data[0])
         link = get_link(course=course, week=week)
-        await callback.message.edit_text('Ваше Расписание:')
+        await callback.message.edit_text('Вот твое расписание\
+                                         \n\n|\\_ _ _/|\
+                                         \n| u w u |')
         await callback.message.answer_document(link)
     except:
-        await callback.message.edit_text('Сорян, я не нашел рассписание :(\nВозможно его еще не загрузили на сайт колледжа')
+        await callback.message.edit_text('Сорян, я не нашел рассписание\nВозможно его еще не загрузили на сайт колледжа\
+                                         \n\n|\\_ _ _/|\
+                                         \n| T _ T |')
 
 
 @rout_callbacks.callback_query(F.data.in_(['1', '2', '3', '0', 'c']))
@@ -37,13 +42,18 @@ async def get_this_week(callback: CallbackQuery):
             course = int(callback.data)
             
             if add_user(user_chat_id=callback.message.chat.id, course=course):
-                await callback.message.edit_text(f'Отлично, теперь по пятницам я смогу отправлять сюда расписане за {course + 1}-й курс')
+                await callback.message.edit_text(f'Отлично, теперь по пятницам я смогу отправлять сюда расписане за {course + 1}-й курс\
+                                                 \n\n|\\_ _ _/|\
+                                                 \n| u w u|')
             else:
-                await callback.message.edit_text('Вы уже подлючены к рассылке')
+                await callback.message.edit_text('Вы уже подлючены к рассылке\
+                                                 \n\n|\\_ _ _/|\
+                                                 \n| o _ o |')
         else:
             await callback.message.edit_text('Запрос отменен', reply_markup=None)
     except Exception as ex:
-        await callback.message.edit_text('Сорян, что-то пошло не так :|')
+        await callback.message.edit_text('Сорян, что-то пошло не так\
+                                         \n\n./|_ _ _|\\   <--- *стыдно*')
         print(ex)
 
 
@@ -57,28 +67,36 @@ async def get_this_week(callback: CallbackQuery):
             if edit_user(user_chat_id=callback.message.chat.id, new_course=course):
                 await callback.message.edit_text(f'Отлично, курс обновлен на {course+1}-й')
             else:
-                await callback.message.edit_text('Вы не подключены к рассылке')
+                await callback.message.edit_text('Вы не подключены к рассылке\
+                                                 \n\n|\\_ _ _/|\
+                                                 \n| o _ o |')
         else:
             await callback.message.edit_text('Запрос отменен', reply_markup=None)
     except Exception as ex:
-        await callback.message.edit_text('Сорян, что-то пошло не так :|')
+        await callback.message.edit_text('Сорян, что-то пошло не так`\
+                                         \n\n./|_ _ _|\\   <--- *стыдно*')
         print(ex)
 
 
 @rout_callbacks.message(F.text == CALL)
 async def bug_report(message: Message, state: FSMContext):
     await state.set_state(Report.bag)
-    await message.answer('Опишите что у вас пошло не так, или напишите свое предложение о доработке бота', reply_markup=kb.cancel)
+    await message.answer('Опишите что у вас пошло не так, или напишите свое предложение о доработке бота\
+                                       \n\n|\\_ _ _/|\
+                                       \n| o w o|', reply_markup=kb.cancel)
 
 
 @rout_callbacks.message(Report.bag)
 async def send_repot(message: Message, state: FSMContext):
     try:
         await message.forward(os.getenv('DEVELOPER'))
-        await message.reply("Я передал ваше сообщение разработчику.\nСпасибо за помощь в развитии пректа!", reply_markup=kb.menu)
+        await message.reply(emoji.emojize("Я передал ваше сообщение разработчику. Спасибо за помощь в развитии пректа\
+                                          \n\n|\\_ _ _/|\
+                                          \n| o w o|:thumbs_up:"), reply_markup=kb.menu)
         await state.clear()
     except Exception as ex:
-        await message.answer('Так, у меня что-то cломалось и отправить озыв не удалось\nПрошу прощения!', reply_markup=None)
+        await message.answer('Так, у меня что-то cломалось и отправить озыв не удалось\nПрошу прощения!\
+                             \n\n/|_ _ _|\\   <--- *стыдно*', reply_markup=None)
         print(ex)
 
 
@@ -108,11 +126,16 @@ async def delete_user_finally(callback: CallbackQuery):
     try:
         from auto_scheduler import delete_user
         delete_user(callback.message.chat.id)
-        await callback.message.edit_text('Рассылка оменена')
+        await callback.message.edit_text('Рассылка оменена\
+                                         \n\n|\\_ _ _/|\
+                                         \n| U _ U |')
     except Exception as ex:
-        await callback.message.edit_text('Что-то пошло не так')
+        await callback.message.edit_text('Что-то пошло не так\
+                                         \n\n./|_ _ _|\\   <--- *стыдно*')
 
 
 @rout_callbacks.callback_query(F.data == 'no')
 async def cancel_delete_user(callback: CallbackQuery):
-    await callback.message.edit_text('Что бы вы хотели настроить?', reply_markup=kb.auto_settings) 
+    await callback.message.edit_text('Что бы вы хотели настроить?\
+                                     \n\n|\\_ _ _/|\
+                                     \n| o w o|', reply_markup=kb.auto_settings) 
