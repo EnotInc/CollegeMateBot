@@ -26,7 +26,7 @@ async def get_this_week(callback: CallbackQuery):
         link = get_link(course=course, week=week)
         await callback.message.edit_text('Вот твое расписание\
                                          \n\n|\\_ _ _/|\
-                                         \n| u w u |')
+                                         \n| u w u|')
         await callback.message.answer_document(link)
     except:
         await callback.message.edit_text('Сорян, я не нашел рассписание\nВозможно его еще не загрузили на сайт колледжа\
@@ -56,7 +56,7 @@ async def get_this_week(callback: CallbackQuery):
             await callback.message.edit_text('Запрос отменен', reply_markup=None)
     except Exception as ex:
         await callback.message.edit_text('Сорян, что-то пошло не так\
-                                         \n\n./|_ _ _|\\   <--- *стыдно*')
+                                         \n\n/|_ _ _|\\   <--- *стыдно*')
         print(f'error at callback get_this_week:\n{ex}')
 
 
@@ -79,7 +79,7 @@ async def edit_this_week(callback: CallbackQuery):
             await callback.message.edit_text('Запрос отменен', reply_markup=None)
     except Exception as ex:
         await callback.message.edit_text('Сорян, что-то пошло не так`\
-                                         \n\n./|_ _ _|\\   <--- *стыдно*')
+                                         \n\n/|_ _ _|\\   <--- *стыдно*')
         print(ex)
 
 

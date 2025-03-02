@@ -9,13 +9,6 @@ rout_messages = Router()
 
 
 time_array = ['9:00 - 10:30', '10:50 - 11:35 & 11:55 - 12:40', '13:00 - 14:30', '14:50 - 16:20', '16:30 - 18:00']
-
-
-@rout_messages.message(F.text == b.ABOUT)
-async def about(message:Message):
-    await message.answer('Еще раз привет, я кот Аскии. Нужен я для того что-бы помогать тебе с расписанием и некоторыми другими вещами по колледжу. Подробнее про то как я работаю можешь почитать тут:\nhttps://github.com/EnotInc/CollegeMateBot\
-                         \n\n|\\_ _ _/|\
-                         \n| o u o |')
  
 
 @rout_messages.message(F.text == b.TIME)
