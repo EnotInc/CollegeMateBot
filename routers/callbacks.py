@@ -53,11 +53,11 @@ async def get_this_week(callback: CallbackQuery):
                                                  \n\n|\\_ _ _/|\
                                                  \n| o _ o |')
         else:
-            await callback.message.edit_text('Запрос отменен', reply_markup=None)
+            await callback.message.edit_text('Запрос отменен', reply_markup=kb.menu)
     except Exception as ex:
+        print(f'error at callback get_this_week:\n{ex}')
         await callback.message.edit_text('Сорян, что-то пошло не так\
                                          \n\n/|_ _ _|\\   <--- *стыдно*')
-        print(f'error at callback get_this_week:\n{ex}')
 
 
 @rout_callbacks.callback_query(F.data.in_(['e1', 'e2', 'e3', 'e0', 'c']))
@@ -76,7 +76,7 @@ async def edit_this_week(callback: CallbackQuery):
                                                  \n\n|\\_ _ _/|\
                                                  \n| o _ o |')
         else:
-            await callback.message.edit_text('Запрос отменен', reply_markup=None)
+            await callback.message.edit_text('Запрос отменен', reply_markup=kb.menu)
     except Exception as ex:
         await callback.message.edit_text('Сорян, что-то пошло не так`\
                                          \n\n/|_ _ _|\\   <--- *стыдно*')
@@ -101,7 +101,7 @@ async def send_repot(message: Message, state: FSMContext):
         await state.clear()
     except Exception as ex:
         await message.answer('Так, у меня что-то cломалось и отправить озыв не удалось\nПрошу прощения!\
-                             \n\n/|_ _ _|\\   <--- *стыдно*', reply_markup=None)
+                             \n\n/|_ _ _|\\   <--- *стыдно*', reply_markup=kb.menu)
         print(ex)
 
 

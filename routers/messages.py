@@ -6,9 +6,6 @@ import keyboards as kb
 
 
 rout_messages = Router()
-
-
-time_array = ['9:00 - 10:30', '10:50 - 11:35 & 11:55 - 12:40', '13:00 - 14:30', '14:50 - 16:20', '16:30 - 18:00']
  
 
 @rout_messages.message(F.text == b.TIME)
