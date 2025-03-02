@@ -14,10 +14,10 @@ async def friday_schedule():
             users = json.load(file)
         
         for user in users:
-            await bot.send_message(chat_id=user['user_chat_id'], text='Ваше расписание:')
-            await bot.send_document(chat_id=user['user_chat_id'], document=get_link(course=user['user_course'], week=1))
+            await bot.send_message(chat_id=user['user_chat_id'], message_thread_id=user['user_topic'], text='Ваше расписание:')
+            await bot.send_document(chat_id=user['user_chat_id'], message_thread_id=user['user_topic'], document=get_link(course=user['user_course'], week=1))
     except Exception as ex:
-        print(ex)
+        print(f'error at sending message:\n{ex}')
 
 
 async def scheduler():
@@ -25,9 +25,9 @@ async def scheduler():
     
     scheduler.add_job(
          friday_schedule, trigger=CronTrigger(
-              day_of_week="fri",
-              hour="12",
-              minute="40",
+              day_of_week="*",
+              hour="*",
+              minute="*",
               timezone="Europe/Moscow"
          )
     )
@@ -35,7 +35,7 @@ async def scheduler():
     scheduler.start()
 
 
-def add_user(user_chat_id, course) -> bool:
+def add_user(user_chat_id, course, topic=None) -> bool:
     try:
         new_user = []
 
@@ -47,7 +47,8 @@ def add_user(user_chat_id, course) -> bool:
 
         new_user.append({
             'user_chat_id': user_chat_id,
-            'user_course': course
+            'user_course': course,
+            'user_topic': topic
         })
 
         with open('users.json', 'r+') as file:

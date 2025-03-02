@@ -2,6 +2,10 @@ import requests
 import os
 
 from datetime import date, datetime
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 headers = {
@@ -15,7 +19,7 @@ url = os.getenv('URL')
 def get_link(course=0, week=0):
     s = requests.Session()
 
-    response = s.get(url=url, headers=headers)
+    response = s.get(url=url)
     jres = response.json()
     s.close()
 

@@ -40,8 +40,11 @@ async def get_this_week(callback: CallbackQuery):
         if callback.data != 'c':
             from auto_scheduler import add_user
             course = int(callback.data)
-            
-            if add_user(user_chat_id=callback.message.chat.id, course=course):
+            try:
+                topic = int(callback.message.message_thread_id)
+            except:
+                topic = None
+            if add_user(user_chat_id=callback.message.chat.id, course=course, topic=topic):
                 await callback.message.edit_text(f'Отлично, теперь по пятницам я смогу отправлять сюда расписане за {course + 1}-й курс\
                                                  \n\n|\\_ _ _/|\
                                                  \n| u w u|')
@@ -54,18 +57,20 @@ async def get_this_week(callback: CallbackQuery):
     except Exception as ex:
         await callback.message.edit_text('Сорян, что-то пошло не так\
                                          \n\n./|_ _ _|\\   <--- *стыдно*')
-        print(ex)
+        print(f'error at callback get_this_week:\n{ex}')
 
 
 @rout_callbacks.callback_query(F.data.in_(['e1', 'e2', 'e3', 'e0', 'c']))
-async def get_this_week(callback: CallbackQuery):
+async def edit_this_week(callback: CallbackQuery):
     try:
         if callback.data != 'c':
             from auto_scheduler import edit_user
             course = int(callback.data[1])
             
             if edit_user(user_chat_id=callback.message.chat.id, new_course=course):
-                await callback.message.edit_text(f'Отлично, курс обновлен на {course+1}-й')
+                await callback.message.edit_text(f'Отлично, курс обновлен на {course+1}-й\
+                                                 \n\n|\\_ _ _/|\
+                                                 \n| o w o|')
             else:
                 await callback.message.edit_text('Вы не подключены к рассылке\
                                                  \n\n|\\_ _ _/|\
