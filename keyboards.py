@@ -11,6 +11,7 @@ menu = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=b.AUTO)],
     [KeyboardButton(text=b.THIS), KeyboardButton(text=b.NEXT)],
     [KeyboardButton(text=b.TIME), KeyboardButton(text=b.CALL)],
+    [KeyboardButton(text=b.CANTEEN)]
 ], resize_keyboard=True, input_field_placeholder="= )", one_time_keyboard=False)
 
 

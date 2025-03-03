@@ -76,6 +76,7 @@ def delete_user(user_chat_id):
         print(f'Error at delete_user:\n{ex}')
         return None
 
+
 def edit_user(user_chat_id, new_course):
     with open('users.json', "r+", encoding="utf-8") as file:
         users = json.load(file)

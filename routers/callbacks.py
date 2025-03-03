@@ -1,6 +1,6 @@
 from aiogram import F, Router
 from aiogram.types import Message, CallbackQuery
-from parser import get_link 
+from parser import get_link
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
 from buttons import CALL
@@ -18,6 +18,7 @@ class Report(StatesGroup):
 class cheduleInit(StatesGroup):
     init = State()
 
+
 @rout_callbacks.callback_query(F.data.in_(['00', '01', '02', '03', '10', '11', '12', '13']))
 async def get_this_week(callback: CallbackQuery):
     try:
@@ -26,7 +27,7 @@ async def get_this_week(callback: CallbackQuery):
         link = get_link(course=course, week=week)
         await callback.message.edit_text('Вот твое расписание\
                                          \n\n|\\_ _ _/|\
-                                         \n| u w u|')
+                                         \n| u w u|  .,,,')
         await callback.message.answer_document(link)
     except:
         await callback.message.edit_text('Сорян, я не нашел рассписание\nВозможно его еще не загрузили на сайт колледжа\
@@ -53,7 +54,7 @@ async def get_this_week(callback: CallbackQuery):
                                                  \n\n|\\_ _ _/|\
                                                  \n| o _ o |')
         else:
-            await callback.message.edit_text('Запрос отменен', reply_markup=kb.menu)
+            await callback.message.edit_text('Запрос отменен')
     except Exception as ex:
         print(f'error at callback get_this_week:\n{ex}')
         await callback.message.edit_text('Сорян, что-то пошло не так\
