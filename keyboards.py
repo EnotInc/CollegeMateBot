@@ -11,8 +11,8 @@ menu = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=b.AUTO)],
     [KeyboardButton(text=b.THIS), KeyboardButton(text=b.NEXT)],
     [KeyboardButton(text=b.TIME), KeyboardButton(text=b.CALL)],
-    [KeyboardButton(text=b.CANTEEN)]
-], resize_keyboard=True, input_field_placeholder="= )", one_time_keyboard=False)
+    [KeyboardButton(text=b.CANTEEN), KeyboardButton(text="some text")]
+], resize_keyboard=True, input_field_placeholder='^ w ^', one_time_keyboard=False)
 
 
 coures_this = InlineKeyboardMarkup(inline_keyboard=[

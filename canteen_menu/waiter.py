@@ -31,24 +31,25 @@ ascii_cat = [
         \n|  x _ x |',
 
         '|\\_ _ _/|\
-        \n| o = o |',
+        \n| o - o |',
 
         '|\\_ _ _/|\
-        \n| ^ W ^ |',
+        \n| ^ w ^ |',
 
         '|\\_ _ _/|\
         \n| * w * |',
 ]
 
-beginning_date = '04.03.2025'
+beginning_date = '03.03.2025'
 
-def get_menu():
+def get_menu_page():
         date_format = '%d.%m.%Y'
 
+        today = date.today()
         day_of_week = date.today().weekday()
-        date1 = datetime.strptime(beginning_date, date_format).date()
+        countdown_day = datetime.strptime(beginning_date, date_format).date()
 
-        delta = date1 - date.today()
+        delta = today - countdown_day
 
         weeks_past = delta.days//7
         day_of_menu = weeks_past%2 * 6 + day_of_week

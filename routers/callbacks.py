@@ -27,7 +27,7 @@ async def get_this_week(callback: CallbackQuery):
         link = get_link(course=course, week=week)
         await callback.message.edit_text('Вот твое расписание\
                                          \n\n|\\_ _ _/|\
-                                         \n| u w u|  .,,,')
+                                         \n| u w u|')
         await callback.message.answer_document(link)
     except:
         await callback.message.edit_text('Сорян, я не нашел рассписание\nВозможно его еще не загрузили на сайт колледжа\
@@ -87,7 +87,7 @@ async def edit_this_week(callback: CallbackQuery):
 @rout_callbacks.message(F.text == CALL)
 async def bug_report(message: Message, state: FSMContext):
     await state.set_state(Report.bag)
-    await message.answer('Опишите что у вас пошло не так, или напишите свое предложение о доработке бота\
+    bug_message = await message.answer('Опишите что у вас пошло не так, или напишите свое предложение о доработке бота\
                                        \n\n|\\_ _ _/|\
                                        \n| o w o|', reply_markup=kb.cancel)
 
