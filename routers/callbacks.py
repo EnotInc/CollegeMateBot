@@ -79,7 +79,7 @@ async def edit_this_week(callback: CallbackQuery):
         else:
             await callback.message.edit_text('Запрос отменен', reply_markup=kb.menu)
     except Exception as ex:
-        await callback.message.edit_text('Сорян, что-то пошло не так`\
+        await callback.message.edit_text('Сорян, что-то пошло не так\
                                          \n\n/|_ _ _|\\   <--- *стыдно*')
         print(ex)
 

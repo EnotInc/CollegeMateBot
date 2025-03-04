@@ -1,14 +1,14 @@
 from aiogram import F, Router
-from aiogram.types import Message, InputFile, FSInputFile
+from aiogram.types import Message, FSInputFile
 
-from parser import date_diff
+from canteen_menu.waiter import get_menu, ascii_cat, menu_chedule_emotions
 
 import buttons as b
 import keyboards as kb
 
 rout_messages = Router()
 
-beginning_date = '29.01.2018'
+beginning_date = '03.04.2025'
  
 
 @rout_messages.message(F.text == b.TIME)
@@ -41,17 +41,14 @@ async def canteen_schedule(message: Message):
                          \n\n|\\_ _ _/|\
                          \n| ^ w ^ |')
     try:
-        day_of_week = date_diff(beginning_date)%7
-        weeks_past = date_diff(beginning_date)//7    
-        day_of_menu = day_of_week + weeks_past%2*6
-
+        day_of_menu = get_menu()
         photo_path = f'canteen_menu/page_{day_of_menu}.jpeg'
         menu_photo = FSInputFile(photo_path)
 
         await message.answer_photo(photo=menu_photo)
-        await msg.edit_text('Вот что сегодня в столовой\
-                                \n\n|\\_ _ _/|\
-                                \n|   . w . |  .,,,')
+        await msg.edit_text(f'Вот что сегодня в столовой\n\n{ascii_cat[menu_chedule_emotions[day_of_menu]]}')
 
     except Exception as ex:
         print(ex)
+        await msg.edit_text('Сорян, что-то пошло не так\
+                             \n\n/|_ _ _|\\   <--- *стыдно*')
