@@ -1,3 +1,4 @@
+import camelot
 import requests
 import os
 
@@ -12,7 +13,6 @@ headers = {
         "Accept": os.getenv('ACCEPT'),
         "User-Agent": os.getenv('USER_AGENT')
 }
-
 url = os.getenv('URL')
 
 
@@ -52,3 +52,46 @@ def date_diff(getted_date):
 
     delta = date1 - today 
     return delta.days
+
+
+def get_today_schedule(course, group):
+    link = get_link(course=course, week=0)
+
+    s = camelot.read_pdf(link)
+
+    df = s[0].df
+    df.columns = df.iloc[0]
+    df = df.drop(0)
+    df = df.reset_index(drop=True)
+
+    column_index = df.columns.get_loc(group)
+    subjects_info = []
+    day_of_week = date.today().weekday()
+
+    for j in range(1, 6):
+        i = j + 5*day_of_week
+        main_string = df[df.columns[column_index]].iloc[i]
+        general_info = main_string.split('\n')
+
+        index = main_string.rfind('\n')
+        subject = main_string[:index].replace('\n','')
+
+        if(subject==''):
+            continue
+
+        if(subject=='ПРАКТИК'):
+            subjects_info = []
+            subjects_info.append('У вас практика, а это значит что расписание следует уточнить у преподавателя')
+            break
+
+        if('Разговоры' in subject):
+            subject += 'важном"'
+            subjects_info.append(f':books: Пара №{i} - {subject}')
+        else:
+            teacher = general_info[len(general_info)-1]
+            classroom = df.iloc[:,column_index+1].tolist()[i]
+            subjects_info.append(f':books: Пара №{j} - {subject}\
+                \n\n:teacher: Преподаватель: {teacher}\
+                \n\n:door: Аудитория: {classroom}')
+
+    return subjects_info

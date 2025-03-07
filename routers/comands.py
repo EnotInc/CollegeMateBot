@@ -11,7 +11,7 @@ rout_commands = Router()
 async def cmd_start(message: Message):
     await message.answer(text="Здарова, я Аскии, твой приятель из колледжа. Сдать бд я тебе, к сожаления, не помогу, но вот подкинуть расписание или напомнить о начале пар - без проблемм \
                          \n\n|\\_ _ _/|\
-                         \n| ^ W ^ |",
+                         \n| ^ W ^|",
                             reply_markup=kb.menu)
 
 
@@ -19,7 +19,7 @@ async def cmd_start(message: Message):
 async def about_cmd(message: Message):
     await message.answer('Еще раз привет, я кот Аскии. Нужен я для того что-бы помогать тебе с расписанием и некоторыми другими вещами по колледжу. Подробнее про то как я работаю можешь почитать тут:\nhttps://github.com/EnotInc/CollegeMateBot\
                          \n\n|\\_ _ _/|\
-                         \n| o w o |',
+                         \n| o w o|',
                          reply_markup=kb.menu)
 
 

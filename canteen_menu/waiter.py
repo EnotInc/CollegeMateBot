@@ -9,7 +9,7 @@ class emotion(enum.Enum):
         good = 3
         best = 4
 
-menu_chedule_emotions = {
+menu_chedule_reactions = {
         0 : emotion.mid.value,
         1 : emotion.default.value,
         2 : emotion.mid.value,

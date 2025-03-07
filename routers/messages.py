@@ -1,7 +1,7 @@
 from aiogram import F, Router
 from aiogram.types import Message, FSInputFile
 
-from canteen_menu.waiter import get_menu_page, ascii_cat, menu_chedule_emotions
+from canteen_menu.waiter import get_menu_page, ascii_cat, menu_chedule_reactions
 
 import buttons as b
 import keyboards as kb
@@ -39,14 +39,20 @@ async def set_auto_scheduler(message: Message):
 async def canteen_schedule(message: Message):
     msg = await message.answer('Ищу меню на сегодня\
                          \n\n|\\_ _ _/|\
-                         \n| ^ w ^ |')
+                         \n| ^ w ^|')
     try:
         menu_page = get_menu_page()
-        photo_path = f'canteen_menu/page_{menu_page}.jpeg'
-        menu_photo = FSInputFile(photo_path)
 
-        await message.answer_photo(photo=menu_photo)
-        await msg.edit_text(f'Вот что сегодня в столовой\n\n{ascii_cat[menu_chedule_emotions[menu_page]]}')
+        if menu_page == 5 or menu_page == 6:
+            await msg.edit_text('Сегодня столовка закрыта\
+                                \n\n|\\_ _ _/|\
+                                \n|Q _ Q|')
+        else:
+            photo_path = f'canteen_menu/page_{menu_page}.jpeg'
+            menu_photo = FSInputFile(photo_path)
+
+            await message.answer_photo(photo=menu_photo)
+            await msg.edit_text(f'Вот что сегодня в столовой\n\n{ascii_cat[menu_chedule_reactions[menu_page]]}')
 
     except Exception as ex:
         print(ex)

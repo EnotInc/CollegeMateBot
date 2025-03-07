@@ -8,10 +8,9 @@ from aiogram.types import (
 
 
 menu = ReplyKeyboardMarkup(keyboard=[
-    [KeyboardButton(text=b.AUTO)],
+    [KeyboardButton(text=b.AUTO), KeyboardButton(text=b.TODAY)],
     [KeyboardButton(text=b.THIS), KeyboardButton(text=b.NEXT)],
-    [KeyboardButton(text=b.TIME), KeyboardButton(text=b.CALL)],
-    [KeyboardButton(text=b.CANTEEN), KeyboardButton(text="some text")]
+    [KeyboardButton(text=b.TIME), KeyboardButton(text=b.CALL), KeyboardButton(text=b.CANTEEN)]
 ], resize_keyboard=True, input_field_placeholder='^ w ^', one_time_keyboard=False)
 
 
