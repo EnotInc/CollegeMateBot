@@ -1,13 +1,12 @@
 import enum
 from datetime import date, datetime
-
+from ASCII_the_cat import cat
 
 class emotion(enum.Enum):
         default = 0
-        bad = 1
-        mid = 2
-        good = 3
-        best = 4
+        bad = 3
+        mid = 1
+        good = 6
 
 menu_chedule_reactions = {
         0 : emotion.mid.value,
@@ -19,26 +18,8 @@ menu_chedule_reactions = {
         7 : emotion.mid.value,
         8 : emotion.bad.value,
         9 : emotion.mid.value,
-        10: emotion.best.value
+        10: emotion.good.value
 }
-
-ascii_cat = [
-
-        '|\\_ _ _/|\
-        \n| o w o|',
-
-        '|\\_ _ _/|\
-        \n|  x _ x |',
-
-        '|\\_ _ _/|\
-        \n| o - o |',
-
-        '|\\_ _ _/|\
-        \n| ^ w ^ |',
-
-        '|\\_ _ _/|\
-        \n| * w * |',
-]
 
 beginning_date = '03.03.2025'
 
@@ -55,4 +36,3 @@ def get_menu_page():
         day_of_menu = weeks_past%2 * 6 + day_of_week
 
         return day_of_menu
-
