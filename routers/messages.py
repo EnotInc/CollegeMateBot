@@ -40,7 +40,7 @@ async def canteen_schedule(message: Message):
     try:
         menu_page = get_menu_page()
 
-        if menu_page == 5 or menu_page == 6:
+        if menu_page == 5 or menu_page == 11:
             await msg.edit_text('Сегодня столовка закрыта'+cat.QwQ)
         else:
             photo_path = f'canteen_menu/page_{menu_page}.jpeg'

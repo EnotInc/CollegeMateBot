@@ -34,5 +34,4 @@ def get_menu_page():
 
         weeks_past = delta.days//7
         day_of_menu = weeks_past%2 * 6 + day_of_week
-
         return day_of_menu
