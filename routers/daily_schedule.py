@@ -109,7 +109,7 @@ async def send_schedule(callback: CallbackQuery):
         group = all_groups[course][groud_id]
         answer = get_today_schedule(course=course, group=group)
         
-        await callback.message.edit_text(f'Вот расписание для группы "{group}"'+cat.owo)
+        await callback.message.edit_text(f'Вот расписание для группы "{group}"'+cat.schedule)
 
         for i in answer:
             await callback.message.answer(emoji.emojize(i))

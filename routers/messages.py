@@ -36,7 +36,7 @@ async def set_auto_scheduler(message: Message):
 
 @rout_messages.message(F.text == b.CANTEEN)
 async def canteen_schedule(message: Message):
-    msg = await message.answer('Ищу меню на сегодня' + cat.AwA)
+    msg = await message.answer('Ищу меню на сегодня' + cat.laptop)
     try:
         menu_page = get_menu_page()
 
@@ -47,7 +47,7 @@ async def canteen_schedule(message: Message):
             menu_photo = FSInputFile(photo_path)
 
             await message.answer_photo(photo=menu_photo)
-            await msg.edit_text(f'Вот что сегодня в столовой\n\n'+cat[menu_chedule_reactions[menu_page]])
+            await msg.edit_text(f'Вот что сегодня в столовой'+cat[menu_chedule_reactions[menu_page]])
 
     except Exception as ex:
         print(ex)

@@ -1,0 +1,6 @@
+aiogram==3.19.0
+APScheduler==3.11.0
+camelot_py==1.0.0
+emoji==2.14.1
+python-dotenv==1.1.0
+Requests==2.32.3
