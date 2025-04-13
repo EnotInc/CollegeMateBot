@@ -1,4 +1,4 @@
-import buttons as b
+import keyboard_stuff.buttons as b
 import emoji
 
 from aiogram.types import (

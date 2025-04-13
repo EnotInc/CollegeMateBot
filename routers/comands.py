@@ -10,7 +10,6 @@ rout_commands = Router()
 
 @rout_commands.message(CommandStart())
 async def cmd_start(message: Message):
-    #await message.answer(text=f"Здарова, я Аскии, твой приятель из колледжа. Сдать бд я тебе, к сожаления, не помогу, но вот подкинуть расписание или напомнить о начале пар - без проблемм{ascii_cat['owo']}",reply_markup=kb.menu)
     await message.answer(text="Здарова, я Аскии, твой приятель из колледжа. Сдать бд я тебе, к сожаления, не помогу, но вот подкинуть расписание или напомнить о начале пар - без проблемм"+cat.hello, reply_markup=kb.menu)
 
 

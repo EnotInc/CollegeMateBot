@@ -24,8 +24,9 @@ async def main():
         dp.include_router(rout_messages)
         dp.include_router(rout_daily)
         await asyncio.gather(dp.start_polling(bot), scheduler())
-    except:
+    except Exception as ex:
          print("Bot Got Stopped")
+         print(ex)
 
 if __name__ == "__main__":
         asyncio.run(main())

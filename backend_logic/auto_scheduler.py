@@ -3,6 +3,7 @@ import json
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 
+from backend_logic.schedule_constructor import get_all_schedules
 from backend_logic.parser import get_link
 from app import bot
 
@@ -33,10 +34,10 @@ async def scheduler():
     )
 
     scheduler.add_job(
-         add_user, trigger=CronTrigger(
+         get_all_schedules, trigger=CronTrigger(
             day_of_week='sun',
-            hour='2',
-            minute='15'
+            hour='*',
+            minute='*'
          ) 
     )
 
