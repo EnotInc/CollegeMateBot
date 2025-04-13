@@ -5,6 +5,7 @@ import os
 from datetime import date, datetime
 from dotenv import load_dotenv
 
+
 from backend_logic.ASCII_the_cat import cat
 
 load_dotenv()
@@ -56,14 +57,9 @@ def date_diff(getted_date):
 
 
 def get_today_schedule(course, group):
-    link = get_link(course=course, week=0)
 
-    s = camelot.read_pdf(link)
-
-    df = s[0].df
-    df.columns = df.iloc[0]
-    df = df.drop(0)
-    df = df.reset_index(drop=True)
+    from backend_logic.schedule_constructor import get_schedule_as_df
+    df = get_schedule_as_df(course=course)
 
     column_index = df.columns.get_loc(group)
     subjects_info = []

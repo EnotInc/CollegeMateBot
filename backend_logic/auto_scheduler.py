@@ -36,8 +36,8 @@ async def scheduler():
     scheduler.add_job(
          get_all_schedules, trigger=CronTrigger(
             day_of_week='sun',
-            hour='*',
-            minute='*'
+            hour='2',
+            minute='15'
          ) 
     )
 

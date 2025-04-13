@@ -27,7 +27,19 @@ def get_all_schedules():
     course_2 = to_df(course_2)
     course_3 = to_df(course_3)
 
-    course_0.to_csv('backend_logic/schedules/couser_0.csv', sep=',', index=False)
-    course_1.to_csv('backend_logic/schedules/couser_1.csv', sep=',', index=False)
-    course_2.to_csv('backend_logic/schedules/couser_2.csv', sep=',', index=False)
-    course_3.to_csv('backend_logic/schedules/couser_3.csv', sep=',', index=False)
+    course_0.to_csv('backend_logic/schedules/course_0.csv', sep=',', index=False)
+    course_1.to_csv('backend_logic/schedules/course_1.csv', sep=',', index=False)
+    course_2.to_csv('backend_logic/schedules/course_2.csv', sep=',', index=False)
+    course_3.to_csv('backend_logic/schedules/course_3.csv', sep=',', index=False)
+
+
+def get_schedule_as_df(course):
+    df = pd.read_csv(f'backend_logic/schedules/course_{course}.csv')
+    return df
+
+def get_groups(course):
+    df = pd.read_csv(f'backend_logic/schedules/course_{course}.csv')
+
+    cdf = [col for col in df.columns if str(col).startswith("2")]
+
+    return cdf
