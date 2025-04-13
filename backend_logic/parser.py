@@ -5,7 +5,7 @@ import os
 from datetime import date, datetime
 from dotenv import load_dotenv
 
-from ASCII_the_cat import cat
+from backend_logic.ASCII_the_cat import cat
 
 load_dotenv()
 

@@ -1,9 +1,9 @@
 from aiogram import Router
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
-from ASCII_the_cat import cat
+from backend_logic.ASCII_the_cat import cat
 
-import keyboards as kb
+import keyboard_stuff.keyboards as kb
 
 rout_commands = Router()
 

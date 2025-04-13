@@ -1,6 +1,6 @@
 import enum
 from datetime import date, datetime
-from ASCII_the_cat import cat
+from backend_logic.ASCII_the_cat import cat
 
 class emotion(enum.Enum):
         default = 0

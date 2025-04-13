@@ -18,7 +18,7 @@ dp = Dispatcher()
 
 async def main():
     try:
-        from auto_scheduler import scheduler
+        from backend_logic.auto_scheduler import scheduler
         dp.include_router(rout_callbacks)
         dp.include_router(rout_commands)
         dp.include_router(rout_messages)

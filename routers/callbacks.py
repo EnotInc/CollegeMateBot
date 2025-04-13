@@ -3,13 +3,13 @@ from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
 
-from ASCII_the_cat import cat
-from parser import get_link
-from buttons import CALL
+from backend_logic.ASCII_the_cat import cat
+from backend_logic.parser import get_link
+from keyboard_stuff.buttons import CALL
 
 import os
 import emoji
-import keyboards as kb
+import keyboard_stuff.keyboards as kb
 
 
 rout_callbacks = Router()
@@ -37,7 +37,7 @@ async def get_this_week(callback: CallbackQuery):
 async def get_this_week(callback: CallbackQuery):
     try:
         if callback.data != 'c':
-            from auto_scheduler import add_user
+            from backend_logic.auto_scheduler import add_user
             course = int(callback.data)
             try:
                 topic = int(callback.message.message_thread_id)
@@ -58,7 +58,7 @@ async def get_this_week(callback: CallbackQuery):
 async def edit_this_week(callback: CallbackQuery):
     try:
         if callback.data != 'c':
-            from auto_scheduler import edit_user
+            from backend_logic.auto_scheduler import edit_user
             course = int(callback.data[1])
             
             if edit_user(user_chat_id=callback.message.chat.id, new_course=course):
@@ -114,7 +114,7 @@ async def edit_user_for_chesuler(callback: CallbackQuery):
 @rout_callbacks.callback_query(F.data == 'yes')
 async def delete_user_finally(callback: CallbackQuery):
     try:
-        from auto_scheduler import delete_user
+        from backend_logic.auto_scheduler import delete_user
         delete_user(callback.message.chat.id)
         await callback.message.edit_text('Рассылка оменена'+cat.u_u)
 

@@ -2,9 +2,9 @@ from aiogram import F, Router
 from aiogram.types import Message, CallbackQuery
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from ASCII_the_cat import cat
-from buttons import TODAY
-from parser import get_today_schedule
+from backend_logic.ASCII_the_cat import cat
+from keyboard_stuff.buttons import TODAY
+from backend_logic.parser import get_today_schedule
 
 import emoji
 

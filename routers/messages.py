@@ -2,10 +2,10 @@ from aiogram import F, Router
 from aiogram.types import Message, FSInputFile
 
 from canteen_menu.waiter import get_menu_page, menu_chedule_reactions
-from ASCII_the_cat import cat
+from backend_logic.ASCII_the_cat import cat
 
-import buttons as b
-import keyboards as kb
+import keyboard_stuff.buttons as b
+import keyboard_stuff.keyboards as kb
 
 rout_messages = Router()
 
