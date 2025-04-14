@@ -1,4 +1,4 @@
 .env
 __pycache__
 users.json
-backend_logic/schedulers
+backend_logic/schedules
