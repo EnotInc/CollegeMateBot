@@ -15,28 +15,13 @@ def to_df(file):
 
     return df
 
-def build_teachers_schedule(df):
-    pass
-
 def get_all_schedules():
+
+    for i in range(4):
+        course = get_link(course=i, week=1)
+        course = to_df(course)
+        course.to_csv(f'backend_logic/schedules/course_{i}.csv', sep=',', index=False)
     
-    course_0 = get_link(course=0, week=1)
-    course_1 = get_link(course=1, week=1)
-    course_2 = get_link(course=2, week=1)
-    course_3 = get_link(course=3, week=1)
-    
-    course_0 = to_df(course_0)
-    course_1 = to_df(course_1)
-    course_2 = to_df(course_2)
-    course_3 = to_df(course_3)
-
-    course_0.to_csv('backend_logic/schedules/course_0.csv', sep=',', index=False)
-    course_1.to_csv('backend_logic/schedules/course_1.csv', sep=',', index=False)
-    course_2.to_csv('backend_logic/schedules/course_2.csv', sep=',', index=False)
-    course_3.to_csv('backend_logic/schedules/course_3.csv', sep=',', index=False)
-
-
-
 def get_schedule_as_df(course):
     df = pd.read_csv(f'backend_logic/schedules/course_{course}.csv')
     return df

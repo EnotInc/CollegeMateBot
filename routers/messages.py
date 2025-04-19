@@ -20,6 +20,7 @@ async def get_time(message:Message):
                          \n\n№ 4 Время: 14:50 - 16:20
                          \n\n№ 5 Время: 16:30 - 18:00''' + cat.OwO)
 
+
 @rout_messages.message(F.text == b.THIS)
 async def get_this_week(message: Message):
     await message.answer('Ты на каком курсе сейчас?', reply_markup=kb.coures_this)
