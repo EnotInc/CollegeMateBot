@@ -38,7 +38,7 @@ def get_link(course=0, week=0):
             if altName[:10] == 'raspisanie':
                 if 0 < date_differense <= 4 and week == 0 and int(altName[26]) == course+1:
                     return link
-                elif date_differense >= 4 and week == 1 and int(altName[26]) == course+1:
+                elif date_differense > 4 and week == 1 and int(altName[26]) == course+1:
                     return link
             else:
                 return None 
@@ -98,9 +98,9 @@ def get_today_schedule(course, group):
                 teacher = general_info[len(general_info)-1]
                 classroom = df.iloc[:,column_index+1].tolist()[i]
                 subjects_info.append(f':books: Пара №{j} - {subject}\
-                    \n\n:teacher: Преподаватель: {teacher}\
-                    \n\n:door: Аудитория: {classroom}\
-                    \n\n:watch: Время пары: {lession_time[j-1]}')
+                    \n:teacher: Преподаватель: {teacher}\
+                    \n:door: Аудитория: {classroom}\
+                    \n:watch: Время пары: {lession_time[j-1]}')
     except Exception as ex:
         print('Error at scheduler contrtuc loop (for)')
         print(ex)
