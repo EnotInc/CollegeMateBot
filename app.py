@@ -19,10 +19,12 @@ dp = Dispatcher()
 async def main():
     try:
         from backend_logic.auto_scheduler import scheduler
+
         dp.include_router(rout_callbacks)
         dp.include_router(rout_commands)
         dp.include_router(rout_messages)
         dp.include_router(rout_daily)
+
         await asyncio.gather(dp.start_polling(bot), scheduler())
     except:
          print("Bot Got Stopped")

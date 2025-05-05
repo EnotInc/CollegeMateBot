@@ -26,7 +26,7 @@ def get_link(course=0, week=0):
     s.close()
 
     try:
-        for i in range(12):
+        for i in range(8):
             req = jres['data']['folders'][2]['files'][i]
             
             altName = req.get('altName')
