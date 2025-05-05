@@ -38,7 +38,7 @@ def get_link(course=0, week=0):
 
             if altName[:10] == 'raspisanie' and int(altName[26]) == course+1 and this_week * (1-week):
                 return link
-
+        return None
     except Exception as ex:
         print(f'Error in parser:\n{ex}')
         return None
