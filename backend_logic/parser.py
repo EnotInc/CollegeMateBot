@@ -1,6 +1,6 @@
-import camelot
 import requests
 import os
+import re
 
 from datetime import date, datetime
 from dotenv import load_dotenv
@@ -26,37 +26,46 @@ def get_link(course=0, week=0):
     s.close()
 
     try:
-        for i in range(12):
+        for i in range(8):
             req = jres['data']['folders'][2]['files'][i]
             
             altName = req.get('altName')
             link = os.getenv('LINK')+req.get('src')
-            last_date = req.get('title')[-10:]
+            
+            first_date, last_date = parse_dates(req.get('title'))
 
-            date_differense = date_diff(last_date)
+            this_week = is_in_this_week(first_date=first_date, last_date=last_date)
 
-            if altName[:10] == 'raspisanie':
-                if 0 < date_differense <= 4 and week == 0 and int(altName[26]) == course+1:
-                    return link
-                elif date_differense > 4 and week == 1 and int(altName[26]) == course+1:
-                    return link
-            else:
-                return None 
-
+            if altName[:10] == 'raspisanie' and int(altName[26]) == course+1 and this_week * (1-week):
+                return link
+        return None
     except Exception as ex:
         print(f'Error in parser:\n{ex}')
         return None
 
 
-def date_diff(getted_date):
+def parse_dates(text): 
+    date_pattern = r'\d{2}\.\d{2}'
+    dates = re.findall(date_pattern, text)
+    
+    this_yaer = date.today().year
+
+    first_date = f'{dates[0]}.{this_yaer}'
+    last_date = f'{dates[1]}.{this_yaer}'
+
+    return first_date, last_date
+
+
+def is_in_this_week(first_date, last_date):
     date_format = '%d.%m.%Y'
 
-    date_with_format = datetime.strptime(getted_date, date_format).date()
-    today = date.today()
+    first_date_format = datetime.strptime(first_date, date_format).date()
+    last_date_format = datetime.strptime(last_date, date_format).date()
 
-    delta = date_with_format - today 
-    print(delta,'=', date_with_format, '-', today)
-    return delta.days
+    today = date.today()
+    in_this_week = first_date_format <= today <= last_date_format
+
+    return in_this_week
 
 
 def get_today_schedule(course, group):
