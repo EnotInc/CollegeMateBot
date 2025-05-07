@@ -15,8 +15,9 @@ async def friday_schedule():
             users = json.load(file)
         
         for user in users:
-            await bot.send_message(chat_id=user['user_chat_id'], message_thread_id=user['user_topic'], text='Ваше расписание:')
-            await bot.send_document(chat_id=user['user_chat_id'], message_thread_id=user['user_topic'], document=get_link(course=user['user_course'], week=1))
+            await bot.send_message(chat_id=user['user_chat_id'], message_thread_id=user['user_topic'], text='ВНИМАНИЕ!\nВ связи с переездом бот будет временно отключен для его доработки. Постараемся вернуться через неделю. \nСпасибо за понимание!\n\n|\\_ _ _/|\n|Q w Q|')
+            #await bot.send_message(chat_id=user['user_chat_id'], message_thread_id=user['user_topic'], text='Ваше расписание:')
+            #await bot.send_document(chat_id=user['user_chat_id'], message_thread_id=user['user_topic'], document=get_link(course=user['user_course'], week=1))
     except Exception as ex:
         print(f'error at sending message:\n{ex}')
 
@@ -26,9 +27,9 @@ async def scheduler():
     
     scheduler.add_job(
          friday_schedule, trigger=CronTrigger(
-              day_of_week="fri",
-              hour="12",
-              minute="40",
+              day_of_week="*",
+              hour="*",
+              minute="*",
               timezone="Europe/Moscow"
          )
     )
